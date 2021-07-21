@@ -1,9 +1,15 @@
 //import s from "./FilterContacts.module.css";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
-const ImageGalleryItem = ({ webformatURL, largeImageURL, onClick, tags }) => {
+const ImageGalleryItem = ({
+  id,
+  webformatURL,
+  largeImageURL,
+  tags,
+  onClick,
+}) => {
   return (
-    <li className="ImageGalleryItem">
+    <li className="ImageGalleryItem" key={id}>
       <img
         src={webformatURL}
         alt={tags}
@@ -14,7 +20,12 @@ const ImageGalleryItem = ({ webformatURL, largeImageURL, onClick, tags }) => {
   );
 };
 
-// ImageGalleryItem.propTypes = {
-// };
+ImageGalleryItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  tags: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default ImageGalleryItem;

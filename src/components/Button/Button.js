@@ -2,7 +2,7 @@
 import PropTypes from "prop-types";
 function Button({ buttonName }) {
   return (
-    <button className="SearchForm-button" type="submit">
+    <button className="SearchForm-button" type="button">
       <span className="SearchForm-button-label">{buttonName}</span>
     </button>
   );

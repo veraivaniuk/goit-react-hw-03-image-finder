@@ -7,6 +7,7 @@ import ImageGallery from "./components/ImageGallery";
 import Container from "./components/Container";
 import Loader from "./components/Loader";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default class App extends Component {
   state = {
@@ -31,6 +32,10 @@ export default class App extends Component {
   }
 
   onSearch = ({ query }) => {
+    if (query.trim() === "") {
+      const notify = () => toast.warn(`Something went wrong`);
+      return notify();
+    }
     this.setState({
       inputQuery: query,
       currentPage: 1,
@@ -46,6 +51,10 @@ export default class App extends Component {
     pixabayApi
       .fetchImages(this.state.inputQuery, this.state.currentPage)
       .then((data) => {
+        if (data.length === 0) {
+          const notify = () => toast.warn(`Something went wrong`);
+          return notify();
+        }
         this.setState((prevState) => ({
           images: [...prevState.images, ...data],
           currentPage: prevState.currentPage + 1,
@@ -59,7 +68,8 @@ export default class App extends Component {
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Шеф все пропало ;)");
+        const notify = () => toast.warn(`Something went wrong`);
+        return notify();
       })
       .finally(() => {
         this.setState((prevState) => ({
@@ -86,7 +96,6 @@ export default class App extends Component {
     return (
       <Container>
         <Searchbar onSubmit={this.onSearch} />
-        <ToastContainer />
         {this.state.isLoading && <Loader />}
         <ImageGallery images={this.state.images} onClick={this.onModal} />
         {this.state.images.length > 0 && (
@@ -99,6 +108,7 @@ export default class App extends Component {
             <img src={this.state.largeImageURL} alt={this.state.tags} />
           </Modal>
         )}
+        <ToastContainer autoClose={3000} />
       </Container>
     );
   }

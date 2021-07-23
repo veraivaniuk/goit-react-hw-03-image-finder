@@ -1,6 +1,4 @@
 import Button from "../Button/Button";
-//import s from "./SubmitForm.module.css";
-//import PropTypes from 'prop-types';
 import { Component } from "react";
 
 class Searchbar extends Component {
@@ -10,7 +8,6 @@ class Searchbar extends Component {
 
   handleChangeName = (e) => {
     this.setState({ query: e.target.value });
-    //console.log(e.target.value);
   };
 
   handleSubmit = (evt) => {

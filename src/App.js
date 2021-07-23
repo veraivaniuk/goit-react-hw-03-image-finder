@@ -1,4 +1,3 @@
-import "./App.css";
 import { Component } from "react";
 import Searchbar from "./components/Searchbar";
 import pixabayApi from "./services/pixabay-api";
